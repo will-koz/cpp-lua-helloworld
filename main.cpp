@@ -19,6 +19,14 @@ int main (void) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 	luaL_dofile(L, "main.lua");
+
+	lua_getglobal(L, "magic_number");
+	double num = lua_tonumber(L, -1);
+	lua_getglobal(L, "magic_name");
+	const char* name = lua_tostring(L, -1);
+
+	printf("Name: %s Num: %f\n", name, num);
+
 	lua_setglobal(L, "main");
 	lua_settop(L, 0);
 
